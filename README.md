@@ -3,10 +3,14 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| email              | string | null: false ,ユニーク制約|
-| name               | string | null: false |
-| encrypted_password | string | null: false |
-| birth-date         |  date  | null: false |
+| email              | string | null: false ,unique: true|
+| nickname          | string | null: false |
+| password           | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
+| birth_date         |  date  | null: false |
 
 has_many :items
 has_many :purchases
@@ -15,41 +19,40 @@ has_many :purchases
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| item-name       | string | null: false |
+| item_name       | string | null: false |
 | price              | integer | null: false |
-| image              | string | null: false |
 | explain            | text   | null: false |
-| category           | string | null: false |
-| condition          | string | null: false |
-| fee-status         | string | null: false |
-| area               | string | null: false |
-| delivery-schedule  | string | null: false |
-| user-id            | references | null: false, foreign_key: true |
+| category_id        | integer | null: false |
+| condition_id       | integer | null: false |
+| fee-status_id      | integer | null: false |
+| area_id            | integer | null: false |
+| delivery_schedule_id | integer | null: false |
+| user            | references | null: false, foreign_key: true |
 
-belongs_to :users
-has_one :purchases
+belongs_to :user
+has_one :purchase
 
 #purchasesテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| user-id            | references | null: false, foreign_key: true |
-| item-id            | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
+| item            | references | null: false, foreign_key: true |
 
-belongs_to :users
-belongs_to :items
-has_one : shipping information
+belongs_to :user
+belongs_to :item
+has_one : shipping address
 
 
-#shipping information
+#shipping addresses
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| product-name       | integer | null: false |
-| prefecture         | string | null: false |
+| postal_code        | string | null: false |
+| prefecture         | integer | null: false |
 | city               | string | null: false |
-| addresses          | string | null: false |
+| address            | string | null: false |
 | building           | string |  |
-| phone-number       | integer | null: false |
+| phone_number       | string | null: false |
 
-belongs_to :shipping information
+belongs_to :shipping address
