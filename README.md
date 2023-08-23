@@ -4,8 +4,8 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | email              | string | null: false ,unique: true|
-| nickname          | string | null: false |
-| password           | string | null: false |
+| nickname           | string | null: false |
+| encrypted_password | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
 | last_name_kana     | string | null: false |
@@ -24,7 +24,7 @@ has_many :purchases
 | explain            | text   | null: false |
 | category_id        | integer | null: false |
 | condition_id       | integer | null: false |
-| fee-status_id      | integer | null: false |
+| fee_status_id      | integer | null: false |
 | area_id            | integer | null: false |
 | delivery_schedule_id | integer | null: false |
 | user            | references | null: false, foreign_key: true |
@@ -41,7 +41,7 @@ has_one :purchase
 
 belongs_to :user
 belongs_to :item
-has_one : shipping address
+has_one : shipping_address
 
 
 #shipping addresses
@@ -54,5 +54,7 @@ has_one : shipping address
 | address            | string | null: false |
 | building           | string |  |
 | phone_number       | string | null: false |
+| purchase           | references | null: false, foreign_key: true |
 
-belongs_to :shipping address
+
+belongs_to :shipping_address
