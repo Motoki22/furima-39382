@@ -1,24 +1,55 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#usersテーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| email              | string | null: false ,ユニーク制約|
+| name               | string | null: false |
+| encrypted_password | string | null: false |
+| birth-date         |  date  | null: false |
 
-* Ruby version
+has_many :items
+has_many :purchases
 
-* System dependencies
+#itemsテーブル
 
-* Configuration
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| item-name       | string | null: false |
+| price              | integer | null: false |
+| image              | string | null: false |
+| explain            | text   | null: false |
+| category           | string | null: false |
+| condition          | string | null: false |
+| fee-status         | string | null: false |
+| area               | string | null: false |
+| delivery-schedule  | string | null: false |
+| user-id            | references | null: false, foreign_key: true |
 
-* Database creation
+belongs_to :users
+has_one :purchases
 
-* Database initialization
+#purchasesテーブル
 
-* How to run the test suite
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| user-id            | references | null: false, foreign_key: true |
+| item-id            | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+belongs_to :users
+belongs_to :items
+has_one : shipping information
 
-* Deployment instructions
 
-* ...
+#shipping information
+
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| product-name       | integer | null: false |
+| prefecture         | string | null: false |
+| city               | string | null: false |
+| addresses          | string | null: false |
+| building           | string |  |
+| phone-number       | integer | null: false |
+
+belongs_to :shipping information
