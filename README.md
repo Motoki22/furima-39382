@@ -25,7 +25,7 @@ has_many :purchases
 | category_id        | integer | null: false |
 | condition_id       | integer | null: false |
 | fee_status_id      | integer | null: false |
-| area_id            | integer | null: false |
+| prefecture_id      | integer | null: false |
 | delivery_schedule_id | integer | null: false |
 | user            | references | null: false, foreign_key: true |
 
@@ -49,7 +49,7 @@ has_one : shipping_address
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | postal_code        | string | null: false |
-| prefecture         | integer | null: false |
+| prefecture_id      | integer | null: false |
 | city               | string | null: false |
 | address            | string | null: false |
 | building           | string |  |
