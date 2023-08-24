@@ -44,7 +44,7 @@ belongs_to :item
 has_one : shipping_address
 
 
-#shipping addresses
+#shipping_addresses
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
@@ -57,4 +57,4 @@ has_one : shipping_address
 | purchase           | references | null: false, foreign_key: true |
 
 
-belongs_to :shipping_address
+belongs_to :purchase
