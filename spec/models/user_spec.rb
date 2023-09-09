@@ -59,9 +59,23 @@ describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
-      it 'パスワードは、半角英数字混合での入力が必須であること' do
+      it 'パスワードは、英字のみのパスワードでは登録できない' do
         @user.password = 'aaaaaa'
         @user.password_confirmation = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+
+      it 'パスワードは、数字のみのパスワードでは登録できない' do
+        @user.password = '111111'
+        @user.password_confirmation = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+
+      it 'パスワードは、全角文字を含むパスワードでは登録できない' do
+        @user.password = 'AAAaaa'
+        @user.password_confirmation = 'AAAaaa'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is invalid')
       end
