@@ -10,13 +10,13 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      render :new # バリデーションエラー時には再び出品ページを表示します。
+      render :new 
     end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:item_name, :price, :explain, :category_id, :condition_id, :fee_status_id, :prefecture_id, :delivery_schedule_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_name, :price, :explain, :category_id, :condition_id, :fee_status_id, :prefecture_id, :delivery_schedule_id).merge(user_id: current_user.id)
   end
 end
