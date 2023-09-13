@@ -34,31 +34,31 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーの情報が必須であること' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       it '商品の状態の情報が必須であること' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
 
       it '配送料の負担の情報が必須であること' do
         @item.fee_status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Fee status must be other than 1")
+        expect(@item.errors.full_messages).to include('Fee status must be other than 1')
       end
 
       it '発送元の地域の情報が必須であること' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it '発送までの日数の情報が必須であること' do
         @item.delivery_schedule_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery schedule must be other than 1")
+        expect(@item.errors.full_messages).to include('Delivery schedule must be other than 1')
       end
 
       it '価格の情報が必須であること' do
@@ -70,33 +70,38 @@ RSpec.describe Item, type: :model do
       it '価格が300未満では保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
-    
+
       it '価格が10,000,000以上では保存できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
-    
+
       it 'priceが半角数字でなければ保存できない' do
         @item.price = '３００' # 全角数字
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
-    
+
       it 'priceが半角英数字混合では保存できない' do
         @item.price = '300a'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
-    
+
       it 'priceが半角英字のみでは保存できない' do
         @item.price = 'abc'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
 end
-
