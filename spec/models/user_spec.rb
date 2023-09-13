@@ -17,7 +17,6 @@ describe User, type: :model do
         @user.nickname = ''
         @user.valid?
         expect(@user.errors.full_messages).to include "Nickname can't be blank"
-
       end
       it 'メールアドレスが必須であること' do
         @user.email = ''
@@ -83,13 +82,13 @@ describe User, type: :model do
       it 'お名前(全角)は、名字が必須であること' do
         @user.last_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name can't be blank",'Last name is invalid')
+        expect(@user.errors.full_messages).to include("Last name can't be blank", 'Last name is invalid')
       end
 
       it 'お名前(全角)は、名前が必須であること' do
         @user.first_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name can't be blank",'First name is invalid')
+        expect(@user.errors.full_messages).to include("First name can't be blank", 'First name is invalid')
       end
 
       it '名字は、全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
@@ -133,6 +132,7 @@ describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
+
     end
   end
 end
