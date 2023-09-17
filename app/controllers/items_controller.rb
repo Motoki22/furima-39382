@@ -28,9 +28,9 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to item_path(@item) 
+      redirect_to item_path(@item)
     else
-      render :edit  
+      render :edit
     end
   end
 
@@ -46,8 +46,6 @@ class ItemsController < ApplicationController
   end
 
   def ensure_correct_user
-    unless current_user.id == @item.user_id
-      redirect_to root_path 
-    end
+    redirect_to root_path unless current_user.id == @item.user_id
   end
 end
