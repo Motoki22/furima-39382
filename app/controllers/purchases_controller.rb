@@ -23,6 +23,7 @@ class PurchasesController < ApplicationController
       :address, 
       :building, 
       :phone_number, 
+      :purchase_id,
     ).merge(user_id: current_user.id, item_id: params[:item_id])
   
   end
