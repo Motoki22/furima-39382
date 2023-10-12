@@ -1,7 +1,6 @@
 class PurchasesController < ApplicationController
-  before_action :set_item, only: [:index, :create]
-
   def index
+    @item = Item.find(params[:item_id])
     @purchase_shipping_address = PurchaseShippingAddress.new
   end
 
@@ -23,10 +22,6 @@ class PurchasesController < ApplicationController
   end
 
   private
-
-  def set_item
-    @item = Item.find(params[:item_id])
-  end
 
   def purchase_params
     params.require(:purchase_shipping_address).permit(
