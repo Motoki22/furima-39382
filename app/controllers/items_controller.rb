@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :redirect_if_sold_out, only: [:edit, :update]
 
   def new
     @item = Item.new
@@ -52,5 +53,11 @@ class ItemsController < ApplicationController
 
   def ensure_correct_user
     redirect_to root_path unless current_user.id == @item.user_id
+  end
+
+  def redirect_if_sold_out
+    if @item.purchase.present? && current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 end
