@@ -8,7 +8,7 @@ class PurchasesController < ApplicationController
   def create
     @purchase_shipping_address = PurchaseShippingAddress.new(purchase_params)
     if @purchase_shipping_address.valid?
-      Payjp.api_key = sk_test_9155ce116dfbb19ac82b419e
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
         amount: @item.price,
         card: purchase_params[:token],
@@ -17,7 +17,6 @@ class PurchasesController < ApplicationController
       @purchase_shipping_address.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
